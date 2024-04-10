@@ -5,8 +5,9 @@ export default function BodyDemo() {
     return (
         <ScrollView
         style={{
-            flex:1
-        }}
+            flex:1,
+        }} 
+
         >
             <Text
                 style={{

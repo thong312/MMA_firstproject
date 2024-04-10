@@ -1,8 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TextInput, View } from 'react-native';
 import FooterDemo from './components/FooterDemo';
 import HeaderDemo from './components/HeaderDemo';
 import BodyDemo from './components/BodyDemo';
+import MenuItems from './components/MenuItems';
+import LoginScreen from './components/LoginScreen';
 
 export default function App() {
   return (
@@ -10,13 +12,19 @@ export default function App() {
       <View
         style={styles.container}>
         <HeaderDemo />
-        <BodyDemo />
+        <LoginScreen/>
+        {/* <MenuItems /> */}
+        {/* <TextInput
+        style={{
+          borderColor:'black',
+          borderWidth: 1
+        }}
+        /> */}
       </View>
       <View
         style={{
-          backgroundColor:'#495E57'
+          backgroundColor:'#ecfeff'
         }}>
-      
         <FooterDemo />
       </View>
     </>
@@ -28,6 +36,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#22d3ee',
+    backgroundColor: '#ecfeff',
   },
 });
