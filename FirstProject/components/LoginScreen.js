@@ -1,13 +1,30 @@
-import { ScrollView, Text, StyleSheet, TextInput, Button, SafeAreaView } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
+import { ScrollView, Text, StyleSheet, TextInput, Button, SafeAreaView, View } from 'react-native';
 
 export default function LoginScreen() {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [loginMessage, setLoginMessage] = useState('');
+
+    // Simulated login function
+    const handleLogin = () => {
+        // Example validation: replace with actual authentication logic
+        if (email === "user@example.com" && password === "password") {
+            setLoginMessage("Login Successful!");
+            // Additional actions upon successful login
+        } else {
+            setLoginMessage("Login Failed. Please try again.");
+        }
+    };
+
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <ScrollView contentContainerStyle={styles.container}>
                 <Text style={styles.headerText}>Welcome to Little Lemon</Text>
                 <Text style={styles.regularText}>Login to continue</Text>
                 <TextInput
+                    value={email}
+                    onChangeText={setEmail}
                     placeholder="Email"
                     placeholderTextColor="#7f8c8d"
                     style={styles.input}
@@ -15,12 +32,20 @@ export default function LoginScreen() {
                     autoCapitalize="none"
                 />
                 <TextInput
+                    value={password}
+                    onChangeText={setPassword}
                     placeholder="Password"
                     placeholderTextColor="#7f8c8d"
                     style={styles.input}
                     secureTextEntry={true}
                 />
-                <Button title="Login" onPress={() => console.log('Login pressed')} color="#16a085" />
+                <Button title="Login" onPress={handleLogin} color="#16a085" />
+                {/* Conditionally rendered login message */}
+                {loginMessage.length > 0 && (
+                    <View style={styles.messageContainer}>
+                        <Text style={styles.messageText}>{loginMessage}</Text>
+                    </View>
+                )}
             </ScrollView>
         </SafeAreaView>
     );
@@ -28,28 +53,32 @@ export default function LoginScreen() {
 
 const styles = StyleSheet.create({
     container: {
+        flexGrow: 1,
         justifyContent: 'center',
-        padding: 10,
+        alignItems: 'center',
+        padding: 20,
     },
     headerText: {
-        // paddingVertical: 20,
-        fontSize: 30,
-        color: '#155e75',
-        textAlign: 'center',
+        fontSize: 24,
+        fontWeight: 'bold',
+        marginBottom: 20,
     },
     regularText: {
-        fontSize: 20,
-        paddingBottom: 20,
-        color: '#155e75',
-        textAlign: 'center',
+        fontSize: 18,
+        marginBottom: 20,
     },
     input: {
-        borderColor: '#0284c7',
-        borderWidth: 1,
-        borderRadius: 5,
-        padding: 10,
+        width: '100%',
         marginBottom: 20,
-        fontSize: 16,
-        color: '#34495e',
+        padding: 10,
+        borderWidth: 1,
+        borderColor: '#bdc3c7',
+        borderRadius: 5,
+    },
+    messageContainer: {
+        marginTop: 20,
+    },
+    messageText: {
+        color: 'red', // Use a different color if the message indicates success
     },
 });
