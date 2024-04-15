@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import { ScrollView, Text, StyleSheet, TextInput, Button, SafeAreaView, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native'; // Import useNavigation hook
 
 export default function LoginScreen() {
+    const navigation = useNavigation(); // Get navigation object
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loginMessage, setLoginMessage] = useState('');
 
-    // Simulated login function
     const handleLogin = () => {
-        // Example validation: replace with actual authentication logic
         if (email === "user@example.com" && password === "password") {
             setLoginMessage("Login Successful!");
-            // Additional actions upon successful login
+            navigation.navigate('Home'); // Navigate to the 'Home' screen
         } else {
             setLoginMessage("Login Failed. Please try again.");
         }
@@ -40,7 +40,6 @@ export default function LoginScreen() {
                     secureTextEntry={true}
                 />
                 <Button title="Login" onPress={handleLogin} color="#16a085" />
-                {/* Conditionally rendered login message */}
                 {loginMessage.length > 0 && (
                     <View style={styles.messageContainer}>
                         <Text style={styles.messageText}>{loginMessage}</Text>
@@ -50,6 +49,9 @@ export default function LoginScreen() {
         </SafeAreaView>
     );
 }
+
+// Styles remain the same
+
 
 const styles = StyleSheet.create({
     container: {
